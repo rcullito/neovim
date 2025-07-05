@@ -1,0 +1,9 @@
+{
+  "ale": { "branch": "master", "commit": "9e49019a2683bff012d53f28546ff968075ea3b9" },
+  "fzf": { "branch": "master", "commit": "ff1550bb383c74267416132592516aae8662833d" },
+  "fzf.vim": { "branch": "master", "commit": "3725f364ccd25b85a91970720ba9bc2931861910" },
+  "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
+  "lightline.vim": { "branch": "master", "commit": "e358557e1a9f9fc860416c8eb2e34c0404078155" },
+  "vim-highlightedyank": { "branch": "master", "commit": "285a61425e79742997bbde76a91be6189bc988fb" },
+  "vim-rooter": { "branch": "master", "commit": "51402fb77c4d6ae94994e37dc7ca13bec8f4afcc" }
+}
