@@ -20,8 +20,13 @@ vim.opt.rtp:prepend(lazypath)
 -- This is also a good place to setup other settings (vim.opt)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
+-- <leader><leader> toggles between buffers
+vim.keymap.set('n', '<leader><leader>', '<c-^>')
+-- quick-open
+vim.keymap.set('', '<leader>f', '<cmd>GFiles<cr>')
+-- search buffers
+vim.keymap.set('n', '<leader>l', '<cmd>Buffers<cr>')
 
--- Setup lazy.nvim
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
