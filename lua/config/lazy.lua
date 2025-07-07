@@ -27,6 +27,10 @@ vim.keymap.set('', '<leader>f', '<cmd>GFiles<cr>')
 -- search buffers
 vim.keymap.set('n', '<leader>l', '<cmd>Buffers<cr>')
 
+-- infinite undo!
+-- NOTE: ends up in ~/.local/state/nvim/undo/
+vim.opt.undofile = true
+
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
