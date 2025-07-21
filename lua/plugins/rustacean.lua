@@ -18,9 +18,9 @@ return {
 
         settings = {
           ["rust-analyzer"] = {
-            checkOnSave = {
-              command = "check",
-            },
+	     -- these settings affect what was rustaceanvim's project wide settings for clippy
+	     -- a default rust-analyzer process will still run for the current crate with command = check
+            checkOnSave = false,
           },
         },
       },
