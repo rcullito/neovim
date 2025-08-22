@@ -2,8 +2,23 @@ return {
   'mrcjkb/rustaceanvim',
   version = '^6', -- Recommended
   lazy = false, -- This plugin is already lazy
+  dependencies = {
+
+	"williamboman/mason.nvim",
+  },
   config = function()
+
+	         local mason_registry = require('mason-registry')
+                    if not mason_registry.is_installed('codelldb') then
+                        error('codelldb is not installed. Run :MasonInstall codelldb')
+                    end
+
+
+
+
+      local cfg = require('rustaceanvim.config')
     vim.g.rustaceanvim = {
+
       server = {
 	on_attach = function(client, bufnr)
 			vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
