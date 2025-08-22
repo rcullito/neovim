@@ -5,6 +5,6 @@ return {
 	"junegunn/fzf",
 	"junegunn/fzf.vim",
 	"williamboman/mason.nvim",
-    	"mfussenegger/nvim-dap",
-    	"jay-babu/mason-nvim-dap.nvim"
+	"mfussenegger/nvim-dap",
+	"jay-babu/mason-nvim-dap.nvim",
 }
