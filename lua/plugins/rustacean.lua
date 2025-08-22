@@ -2,10 +2,17 @@ return {
 	"mrcjkb/rustaceanvim",
 	version = "^6", -- Recommended
 	lazy = false, -- This plugin is already lazy
-	dependencies = {
-
-		"williamboman/mason.nvim",
-	},
+        ft = "rust",
+        dependencies = {
+            'williamboman/mason.nvim',
+            'williamboman/mason-lspconfig.nvim',
+            'jay-babu/mason-nvim-dap.nvim',
+        },
+        opts = function(_, opts)
+            require('mason-nvim-dap').setup({
+                ensure_installed = { "codelldb" },
+            })
+        end,
 	config = function()
 		local cfg = require("rustaceanvim.config")
 		vim.g.rustaceanvim = {
@@ -29,19 +36,6 @@ return {
 						checkOnSave = false,
 					},
 				},
-			},
-			dap = {
-				adapter = function()
-					local mason_path = require("mason-core.path")
-					local codelldb_path = mason_path.package_prefix("codelldb") .. "/extension/adapter/codelldb"
-
-					if vim.fn.executable(codelldb_path) == 0 then
-						error("codelldb not found at: " .. codelldb_path, vim.log.levels.ERROR)
-						return nil
-					end
-
-					return require("rustaceanvim.config").get_codelldb_adapter(codelldb_path)
-				end,
 			},
 		}
 	end,
