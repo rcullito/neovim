@@ -33,6 +33,12 @@ vim.keymap.set('n', '<leader>o', '<cmd>only<cr>')
 -- NOTE: ends up in ~/.local/state/nvim/undo/
 vim.opt.undofile = true
 
+-- sidebar
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.signcolumn = "yes"
+
+
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
