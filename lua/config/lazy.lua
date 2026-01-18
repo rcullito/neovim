@@ -29,6 +29,18 @@ vim.keymap.set('n', '<leader>l', '<cmd>Buffers<cr>')
 
 vim.keymap.set('n', '<leader>o', '<cmd>only<cr>')
 
+vim.api.nvim_set_keymap("n", "<leader>bd", ":lua DeleteOtherBuffers()<CR>", { noremap = true })
+
+function DeleteOtherBuffers()
+  local current = vim.api.nvim_get_current_buf()
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if buf ~= current and vim.api.nvim_buf_is_loaded(buf) then
+      pcall(vim.api.nvim_buf_delete, buf, {})
+    end
+  end
+end
+
+
 -- infinite undo!
 -- NOTE: ends up in ~/.local/state/nvim/undo/
 vim.opt.undofile = true
