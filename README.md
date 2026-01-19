@@ -4,13 +4,11 @@
 ~/.config/nvim
 ```
 
-
 ## Testing
 
 ```
 Space t, which equates to :RustLsp testables
 ```
-
 
 ## Debugging
 
@@ -22,5 +20,8 @@ Space dc, which equates to :lua require('dap').continue() ## this will actually 
 Space dt, which equats to terminating the debugging session.
 ```
 
-## TODO 
-set keybindings for the above commands. 
+## Gotchas
+
+### Tree Sitter CLI had to be installed with cargo
+
+cargo install --locked tree-sitter-cli
