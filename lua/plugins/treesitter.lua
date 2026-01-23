@@ -39,13 +39,6 @@ return {
         end,
       },
     },
-    init = function()
-      require('vim.treesitter.query').add_predicate('is-mise?', function(_, _, bufnr, _)
-        local filepath = vim.api.nvim_buf_get_name(tonumber(bufnr) or 0)
-        local filename = vim.fn.fnamemodify(filepath, ':t')
-        return string.match(filename, '.*mise.*%.toml$') ~= nil
-      end, { force = true, all = false })
-    end,
     opts = {
       ensure_installed = {
         'bash',
@@ -76,33 +69,6 @@ return {
           end
         end,
       })
-
-      -- function _G._foldtext()
-      --   local text = vim.treesitter.foldtext()
-      --   if type(text) == 'table' then
-      --     local nlines = vim.v.foldend - vim.v.foldstart
-      --     local closer = vim.api.nvim_buf_get_lines(0, vim.v.foldend - 1, vim.v.foldend, true)
-      --     table.insert(text, { ' ', 'Normal' })
-      --     table.insert(text, { string.format('+%d lines', nlines), { '@comment' } })
-      --     table.insert(text, { ' ', 'Normal' })
-      --     table.insert(text, { closer[1]:match('^%s*(.-)%s*$') })
-      --   end
-      --   return text
-      -- end
-      --
-      -- -- Folding options
-      -- vim.o.foldmethod = 'expr'
-      -- vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-      -- vim.o.foldtext = 'v:lua._foldtext()'
-      -- -- Don't fold everything at startup
-      -- vim.o.foldlevel = 99
-      -- vim.o.foldlevelstart = 99
-      -- vim.o.foldcolumn = 'auto:3'
-      -- vim.opt.fillchars:append({
-      --   foldopen = '▼',
-      --   foldclose = '▶',
-      --   fold = ' ',
-      -- })
     end,
   },
 }
