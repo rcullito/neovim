@@ -24,4 +24,12 @@ Space dt, which equats to terminating the debugging session.
 
 ### Tree Sitter CLI had to be installed with cargo
 
+```
 cargo install --locked tree-sitter-cli
+```
+
+### Run this after editing branches/versions
+
+```
+:Lazy sync
+```
