@@ -25,6 +25,7 @@ return {
                 i = { '@block.inner', '@conditional.inner', '@loop.inner' },
               }),
               f = ai.gen_spec.treesitter({ a = '@function.outer', i = '@function.inner' }), -- function
+              p = ai.gen_spec.treesitter({ a = '@parameter.outer', i = '@parameter.inner' }), -- parameter
               c = ai.gen_spec.treesitter({ a = '@class.outer', i = '@class.inner' }), -- class
               t = { '<([%p%w]-)%f[^<%w][^<>]->.-</%1>', '^<.->().*()</[^/]->$' }, -- tags
               d = { '%f[%d]%d+' }, -- digits
@@ -34,6 +35,7 @@ return {
               },
               u = ai.gen_spec.function_call(), -- u for "Usage"
               U = ai.gen_spec.function_call({ name_pattern = '[%w_]' }), -- without dot in function name
+              g = { '[%w_]+%.[%w_.]+' }, -- dotted path (member access)
             },
           }
         end,
