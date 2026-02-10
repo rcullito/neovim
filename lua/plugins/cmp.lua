@@ -1,8 +1,11 @@
 return -- LSP-based code-completion
 {
 	"hrsh7th/nvim-cmp",
-	-- load cmp on InsertEnter
+	-- load cmp on InsertEnter or Ctrl-Space in normal mode
 	event = "InsertEnter",
+	keys = {
+		{ "<C-Space>", mode = "n" },
+	},
 	-- these dependencies will only be loaded when cmp loads
 	-- dependencies are always lazy-loaded unless specified otherwise
 	dependencies = {
@@ -44,5 +47,8 @@ return -- LSP-based code-completion
 				{ name = "path" },
 			}),
 		})
+
+		-- Map Ctrl-Space in normal mode to enter insert mode and trigger completion
+		vim.keymap.set("n", "<C-Space>", "i<C-Space>", { remap = true })
 	end,
 }
