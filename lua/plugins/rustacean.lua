@@ -30,6 +30,7 @@ return {
 					vim.keymap.set("n", "<leader>t", function()
 						vim.cmd.RustLsp("testables")
 					end, { desc = "Run Rust test" })
+					vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 				end,
 
 				settings = {
@@ -37,6 +38,12 @@ return {
 						-- these settings affect what was rustaceanvim's project wide settings for clippy
 						-- a default rust-analyzer process will still run for the current crate with command = check
 						checkOnSave = false,
+						inlayHints = {
+							lifetimeElisionHints = {
+								enable = "always",
+								useParameterNames = true,
+							},
+						},
 					},
 				},
 			},
