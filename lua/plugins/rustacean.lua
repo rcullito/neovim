@@ -23,6 +23,7 @@ return {
 					vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 					vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
 					vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
+					vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
 					vim.keymap.set({ "n", "v" }, "<leader>a", vim.lsp.buf.code_action, opts)
 					vim.keymap.set("n", "<leader>m", "<cmd>marks<CR>", { desc = "List marks" })
 					vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts)
