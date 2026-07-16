@@ -41,6 +41,30 @@ function DeleteOtherBuffers()
 end
 
 
+-- copy git forge URLs via forgelink (https://github.com/dpassen/forgelink)
+if vim.fn.exepath('forgelink') ~= '' then
+  vim.keymap.set('n', '<leader>cf',
+    function()
+      local curFile = vim.api.nvim_buf_get_name(0)
+      local output = vim.fn.system({ 'forgelink', 'print', curFile })
+      vim.fn.setreg('+', vim.trim(output))
+    end,
+    { desc = "Copy URL to Git forge for current file to clipboard" }
+  )
+  vim.keymap.set('v', '<leader>cf',
+    function()
+      vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "x", false)
+      local curFile = vim.api.nvim_buf_get_name(0)
+      local startLine = vim.fn.line("'<")
+      local endLine = vim.fn.line("'>")
+      local lineRef = startLine == endLine and tostring(startLine) or (startLine .. '-' .. endLine)
+      local output = vim.fn.system({ 'forgelink', 'print', curFile .. ':' .. lineRef })
+      vim.fn.setreg('+', vim.trim(output))
+    end,
+    { desc = "Copy URL to Git forge for current file with selected line numbers to clipboard" }
+  )
+end
+
 -- infinite undo!
 -- NOTE: ends up in ~/.local/state/nvim/undo/
 vim.opt.undofile = true
