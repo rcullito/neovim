@@ -39,6 +39,9 @@ return {
 						-- a default rust-analyzer process will still run for the current crate with command = check
 						checkOnSave = false,
 						inlayHints = {
+							implicitDrops = {
+								enable = true,
+							},
 							lifetimeElisionHints = {
 								enable = "always",
 								useParameterNames = true,
