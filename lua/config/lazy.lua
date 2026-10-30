@@ -76,8 +76,15 @@ vim.opt.signcolumn = "yes"
 
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*.rs",
-  callback = function()
+  callback = function(args)
     vim.lsp.buf.format({ async = false })
+    -- work around nvim 0.11/0.12 inlay-hint "Invalid 'col': out of range" after rustfmt
+    -- shortens lines: drop the stale hint cache and request fresh hints before any redraw.
+    -- see https://github.com/neovim/neovim/issues/39772
+    if vim.lsp.inlay_hint.is_enabled({ bufnr = args.buf }) then
+      vim.lsp.inlay_hint.enable(false, { bufnr = args.buf })
+      vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+    end
   end,
 })
 

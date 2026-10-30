@@ -17,6 +17,13 @@ return {
         end,
         desc = "Yeet command",
       },
+      {
+        "<leader>xl",
+        function()
+          require("yeet").list_cmd()
+        end,
+        desc = "Yeet command palette",
+      },
     },
   },
 }
