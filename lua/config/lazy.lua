@@ -74,6 +74,11 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.signcolumn = "yes"
 
+-- nvim 0.11 turned off inline diagnostic text by default (gutter sign + underline
+-- only). ALE used to paint messages at end of line; now that it is off for Rust,
+-- have the built-in client do it.
+vim.diagnostic.config({ virtual_text = true })
+
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*.rs",
   callback = function(args)
@@ -89,6 +94,27 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 
+
+-- Who handles what: Neovim's built-in LSP client vs ALE
+--
+-- Rust (*.rs): rustaceanvim attaches rust-analyzer through the built-in client
+--   (vim.lsp). That is what powers the gd/gr/<leader>a keymaps in rustacean.lua,
+--   nvim-cmp completions, inlay hints, and the BufWritePre format above.
+--   ALE is given an empty linter list for rust so it stays out entirely. With its
+--   defaults it started a second rust-analyzer, ran cargo check on every save/edit,
+--   and painted warnings as end-of-line virtual text that shifted wrapped lines.
+--
+-- Go (*.go): nothing here sets up a built-in LSP client for Go (nvim-lspconfig was
+--   dropped when rustaceanvim came in), so ALE's defaults take over:
+--   gofmt, golangci-lint, gopls, govet. ALE drives gopls through its OWN LSP
+--   client, not vim.lsp, so the rustacean.lua keymaps and nvim-cmp do not apply
+--   in Go buffers. Use ALE's commands instead: :ALEGoToDefinition,
+--   :ALEFindReferences, :ALEHover, :ALERename, :ALEDetail, :ALEFix.
+--
+-- When ALE runs: on buffer enter, on save, 200ms after a normal-mode edit, and on
+--   leaving insert mode. It only lints; it never formats on save unless
+--   g:ale_fix_on_save is set.
+vim.g.ale_linters = { rust = {} }
 
 -- Setup lazy.nvim
 require("lazy").setup({

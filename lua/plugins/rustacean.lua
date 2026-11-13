@@ -35,9 +35,13 @@ return {
 
 				settings = {
 					["rust-analyzer"] = {
-						-- these settings affect what was rustaceanvim's project wide settings for clippy
-						-- a default rust-analyzer process will still run for the current crate with command = check
-						checkOnSave = false,
+						-- Run `cargo check` on save so rustc-only diagnostics show up
+						-- (unused Result, borrowck, missing trait items, ...). rust-analyzer's
+						-- native diagnostics do not cover those. workspace = false checks only
+						-- the saved file's package, not the whole workspace. The 'default
+						-- process' that used to do this was ALE's rust-analyzer, now disabled.
+						checkOnSave = true,
+						check = { workspace = false },
 						inlayHints = {
 							implicitDrops = {
 								enable = true,
